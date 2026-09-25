@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dijkstra Immersive Visualizer</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="overlay">
+        <h1>Dijkstra Pathfinding</h1>
+        <p>Watch the algorithm explore the network in the background.</p>
+        <div class="btn-group">
+            <button onclick="runDijkstra()">Start Animation</button>
+            <button onclick="location.reload()">Reset Graph</button>
+        </div>
+    </div>
+    <svg id="graph-svg" viewBox="0 0 900 600" preserveAspectRatio="xMidYMid meet"></svg>
+    <script src="script.js"></script>
+</body>
+</html>

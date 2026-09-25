@@ -1,0 +1,214 @@
+/* --- Light & Vibrant Futuristic Background --- */
+body, html { 
+    margin: 0; 
+    padding: 0; 
+    height: 100vh; 
+    width: 100vw;
+    overflow: hidden; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
+    align-items: center;
+    font-family: 'Inter', sans-serif;
+    
+    /* Thora light aur blueish tone */
+    background: radial-gradient(circle at center, #1e293b 0%, #0f172a 100%);
+    position: relative;
+}
+
+/* Background Grid jo ab saaf nazar aaye ga */
+body::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 0;
+    /* Grid lines ko thora light blue kiya hai */
+    background-image: 
+        linear-gradient(rgba(56, 189, 248, 0.1) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(56, 189, 248, 0.1) 1px, transparent 1px);
+    background-size: 50px 50px;
+    animation: moveGrid 15s linear infinite;
+}
+
+/* Moving Light "Orbs" for depth */
+body::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 0;
+    background: radial-gradient(circle at 50% 50%, rgba(99, 102, 241, 0.15) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+@keyframes moveGrid {
+    0% { background-position: 0 0; }
+    100% { background-position: 50px 50px; }
+}
+
+/* Ensure Graph and Text stay on top */
+.overlay, #graph-svg {
+    position: relative;
+    z-index: 10;
+}
+
+/* Glassmorphism UI Overlay */
+.overlay {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    width: 100%;
+    margin-bottom: 20px; 
+    pointer-events: none;
+    padding: 20px 0;
+}
+
+.overlay h1 {
+    font-size: 3rem;
+    font-weight: 800;
+    letter-spacing: -1px;
+    margin: 0;
+    /* Cyberpunk Gradient Text */
+    background: linear-gradient(to right, #00d4ff, #00ff87);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 0 15px rgba(0, 212, 255, 0.5));
+    text-transform: uppercase;
+}
+
+.overlay p {
+    color: #94a3b8;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    margin-top: 5px;
+}
+
+/* Graph SVG Styling */
+#graph-svg {
+    position: relative;
+    width: 85vw;
+    height: 65vh;
+    z-index: 1;
+    /* Neon glow behind the graph */
+    filter: drop-shadow(0 0 30px rgba(99, 102, 241, 0.1));
+    overflow: visible; 
+}
+
+/* --- Buttons --- */
+.btn-group { 
+    pointer-events: auto; 
+    margin-top: 25px; 
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+button {
+    background: rgba(15, 23, 42, 0.6); 
+    color: #fff; 
+    border: 1px solid rgba(0, 212, 255, 0.4);
+    padding: 12px 30px; 
+    border-radius: 12px;
+    font-weight: 600;
+    cursor: pointer; 
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    backdrop-filter: blur(12px);
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+
+button:hover { 
+    background: #00d4ff; 
+    color: #020617;
+    border-color: #00d4ff;
+    box-shadow: 0 0 25px rgba(0, 212, 255, 0.6);
+    transform: translateY(-5px) scale(1.05); 
+}
+
+/* --- Graph Elements Enhancements --- */
+
+.edge { 
+    stroke: rgba(148, 163, 184, 0.15); 
+    stroke-width: 2; 
+    stroke-linecap: round;
+}
+
+/* Exploring Edge - Moving Lasers */
+.edge-active { 
+    stroke: #00d4ff; 
+    stroke-width: 4; 
+    stroke-dasharray: 10;
+    animation: flow 0.6s linear infinite;
+    filter: drop-shadow(0 0 8px #00d4ff);
+}
+
+/* Final Path - Emerald Glow */
+.edge-path { 
+    stroke: #00ff87; 
+    stroke-width: 6; 
+    stroke-linecap: round;
+    filter: drop-shadow(0 0 12px #00ff87);
+}
+
+/* Modern Nodes */
+.node-circle { 
+    fill: #0f172a; 
+    stroke: rgba(0, 212, 255, 0.5); 
+    stroke-width: 3; 
+    transition: all 0.4s ease; 
+}
+
+/* Visited Node Animation */
+.node-visited { 
+    fill: #00d4ff; 
+    stroke: #fff;
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse {
+    0% { r: 15; stroke-opacity: 1; filter: drop-shadow(0 0 0px #00d4ff); }
+    50% { r: 20; stroke-opacity: 0.5; filter: drop-shadow(0 0 20px #00d4ff); }
+    100% { r: 15; stroke-opacity: 1; filter: drop-shadow(0 0 0px #00d4ff); }
+}
+
+@keyframes flow { 
+    from { stroke-dashoffset: 20; } 
+    to { stroke-dashoffset: 0; } 
+}
+
+/* Labels */
+/* --- Weights aur Labels ko Bold aur Clear banane ke liye --- */
+
+.node-text { 
+    fill: #ffffff; 
+    font-size: 16px; /* Size thora barha diya */
+    font-weight: 800; /* Extra Bold */
+    pointer-events: none; 
+    text-shadow: 0 0 8px rgba(0, 212, 255, 0.8), 0 2px 4px rgba(0,0,0,1);
+}
+
+.weight-text { 
+    fill: #00ff87; /* Neon Green color taake dark background par chamke */
+    font-size: 15px; /* Phelay se bara size */
+    font-weight: 900; /* Maximum boldness */
+    paint-order: stroke;
+    stroke: #020617; /* Number ke bahar dark outline taake wo har hal mein nazar aaye */
+    stroke-width: 3px;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    font-family: 'Courier New', monospace; /* Monospace font numbers ke liye behtar hota hai */
+}
+
+/* Jab rasta (Path) mil jaye toh weight ka color bhi change ho jaye (Optional logic) */
+.edge-path + .weight-text {
+    fill: #ffffff;
+    font-size: 18px;
+    filter: drop-shadow(0 0 5px #00ff87);
+}
